@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.evan.demo.globaltransactionservice1.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.evan.demo.globaltransactionservice1.entity.Order">
+    <id column="order_id" jdbcType="INTEGER" property="order_id" />
+    <result column="order_detail" jdbcType="VARCHAR" property="order_detail" />
+    <result column="order_status" jdbcType="VARCHAR" property="order_status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="create_date" />
+    <result column="status_date" jdbcType="TIMESTAMP" property="status_date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evan.demo.globaltransactionservice1.entity.Order">
+    insert into order (order_id, order_detail, order_status, 
+      create_date, status_date)
+    values (#{order_id,jdbcType=INTEGER}, #{order_detail,jdbcType=VARCHAR}, #{order_status,jdbcType=VARCHAR}, 
+      #{create_date,jdbcType=TIMESTAMP}, #{status_date,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.evan.demo.globaltransactionservice1.entity.Order">
+    update order
+    set order_detail = #{order_detail,jdbcType=VARCHAR},
+      order_status = #{order_status,jdbcType=VARCHAR},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      status_date = #{status_date,jdbcType=TIMESTAMP}
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select order_id, order_detail, order_status, create_date, status_date
+    from order
+    where order_id = #{order_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select order_id, order_detail, order_status, create_date, status_date
+    from order
+  </select>
+</mapper>

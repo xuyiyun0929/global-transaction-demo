@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.evan.demo.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.evan.demo.user.entity.User">
+    <id column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_name" jdbcType="VARCHAR" property="user_name" />
+    <result column="user_status" jdbcType="VARCHAR" property="user_status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="create_date" />
+    <result column="status_date" jdbcType="TIMESTAMP" property="status_date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evan.demo.user.entity.User">
+    insert into user (user_id, user_name, user_status, 
+      create_date, status_date)
+    values (#{user_id,jdbcType=INTEGER}, #{user_name,jdbcType=VARCHAR}, #{user_status,jdbcType=VARCHAR}, 
+      #{create_date,jdbcType=TIMESTAMP}, #{status_date,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.evan.demo.user.entity.User">
+    update user
+    set user_name = #{user_name,jdbcType=VARCHAR},
+      user_status = #{user_status,jdbcType=VARCHAR},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      status_date = #{status_date,jdbcType=TIMESTAMP}
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select user_id, user_name, user_status, create_date, status_date
+    from user
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, user_name, user_status, create_date, status_date
+    from user
+  </select>
+</mapper>

@@ -1,0 +1,28 @@
+spring:  
+  application:
+    name: storage-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/evan
+    username: root
+    password: a2259963
+    driver-class-nam: com.mysql.jdbc.Driver
+
+server:
+  port: 9003
+
+#配置mapper.xml文件存放路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    fetch-registry: true
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: DEBUG
+    com:
+      evan: DEBUG
