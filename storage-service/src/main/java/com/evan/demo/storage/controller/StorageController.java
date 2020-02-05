@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 
@@ -16,14 +17,18 @@ import java.util.Date;
 public class StorageController {
 
     @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
     private StoreMapper storeMapper;
 
     @RequestMapping(value = "/decreaseStore", method = RequestMethod.POST)
-    public String decreaseStore(@RequestBody Integer product_id){
+    public String decreaseStore(@RequestBody Integer product_id) {
         Store store = storeMapper.selectByPrimaryKey(product_id);
         store.setOpr_time(new Date());
 //        store.setProduct_count("99");
         storeMapper.updateByPrimaryKey(store);
+        restTemplate.put("http://ORDER-SERVICE/createOrder", 001);
         log.info("全局事务测试");
         return "ok";
     }

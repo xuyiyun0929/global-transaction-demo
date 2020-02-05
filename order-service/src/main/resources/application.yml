@@ -1,13 +1,14 @@
 spring:  
   application:
     name: order-service
-server:
-  port: 9002
   datasource:
     url: jdbc:mysql://localhost:3306/evan
     username: root
     password: a2259963
     driver-class-nam: com.mysql.jdbc.Driver
+
+server:
+  port: 9003
 
 #配置mapper.xml文件存放路径
 mybatis:
@@ -22,6 +23,6 @@ eureka:
 logging:
   config: classpath:logback-spring.xml
   level:
-    root: INFO
+    root: DEBUG
     com:
       evan: DEBUG

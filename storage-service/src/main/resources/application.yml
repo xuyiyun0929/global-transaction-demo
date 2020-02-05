@@ -8,7 +8,7 @@ spring:
     driver-class-nam: com.mysql.jdbc.Driver
 
 server:
-  port: 9003
+  port: 9002
 
 #配置mapper.xml文件存放路径
 mybatis:
